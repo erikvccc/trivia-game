@@ -1,16 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState} from "react"
+import "./App.css"
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+  const [pantalla, setPantalla]= useState("inicio")
+  const comenzarJuego = () => {
+    setPantalla("juego")
+  }
+  return(
     <>
-      <h1>Prueba</h1>
-    </>
+    {pantalla === "inicio" && (
+      <div className="pantalla-inicio">
+        <h1> Bienenido a Trivia</h1>
+        <button onClick={comenzarJuego}>Comenzar juego</button>
+      </div>
+  )}
+  {pantalla === "juego" && (
+    <div>
+      <h2>Comienza la Trivia... (aca irian las preguntas)</h2>
+    </div>
+  )}
+  </>
   )
-}
-
-export default App
+  }
+  export default App 
