@@ -1,5 +1,6 @@
 import { useState} from "react"
 import "./App.css"
+
 function App() {
   const [pantalla, setPantalla]= useState("inicio")
   const comenzarJuego = () => {
