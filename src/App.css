@@ -38,7 +38,7 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: #232121;
 }
 .opcion {
   margin: 10px;
@@ -49,6 +49,7 @@
   border-radius: 8px;
   background-color: #eee;
   transition: background-color 0.3s;
+  color: #232121;
 }
 
 .opcion.correcta {
@@ -59,4 +60,30 @@
 .opcion.incorrecta {
   background-color: #f44336 !important; /* Rojo */
   color: white;
+}
+.grilla-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.opcion-grilla {
+  padding: 10px;
+  background-color: #eee;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.opcion-grilla:hover {
+  background-color: #ddd;
+}
+
+.opcion-grilla.seleccionada {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
 }
