@@ -106,31 +106,32 @@ function App() {
         <div className="pantalla-inicio">
           <h1>Bienvenido a Trivia</h1>
 
-          <label htmlFor="categoria">Selecciona una temática:</label>
-          <select
-            id="categoria"
-            value={categoriaSeleccionada}
-            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-          >
-            <option value="">-- Elige una categoría --</option>
-            {categorias.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
+          <h3>Selecciona una temática:</h3>
+<div className="grilla-opciones">
+  {categorias.map((cat) => (
+    <button
+      key={cat.id}
+      className={`opcion-grilla ${categoriaSeleccionada === String(cat.id) ? "seleccionada" : ""}`}
+      onClick={() => setCategoriaSeleccionada(String(cat.id))}
+    >
+      {cat.name}
+    </button>
+  ))}
+</div>
 
-          <label htmlFor="dificultad">Selecciona una dificultad:</label>
-          <select
-            id="dificultad"
-            value={dificultadSeleccionada}
-            onChange={(e) => setDificultadSeleccionada(e.target.value)}
-          >
-            <option value="">-- Elige dificultad --</option>
-            <option value="easy">Fácil</option>
-            <option value="medium">Media</option>
-            <option value="hard">Difícil</option>
-          </select>
+<h3>Selecciona una dificultad:</h3>
+<div className="grilla-opciones">
+  {["easy", "medium", "hard"].map((nivel) => (
+    <button
+      key={nivel}
+      className={`opcion-grilla ${dificultadSeleccionada === nivel ? "seleccionada" : ""}`}
+      onClick={() => setDificultadSeleccionada(nivel)}
+    >
+      {nivel === "easy" ? "Fácil" : nivel === "medium" ? "Media" : "Difícil"}
+    </button>
+  ))}
+</div>
+
 
           <button
             onClick={comenzarJuego}
