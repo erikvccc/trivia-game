@@ -40,3 +40,23 @@
 .read-the-docs {
   color: #888;
 }
+.opcion {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  transition: background-color 0.3s;
+}
+
+.opcion.correcta {
+  background-color: #4caf50 !important; /* Verde */
+  color: white;
+}
+
+.opcion.incorrecta {
+  background-color: #f44336 !important; /* Rojo */
+  color: white;
+}
