@@ -38,7 +38,7 @@
 }
 
 .read-the-docs {
-  color: #232121;
+  color: #b59500;
 }
 .opcion {
   margin: 10px;
@@ -49,41 +49,109 @@
   border-radius: 8px;
   background-color: #eee;
   transition: background-color 0.3s;
-  color: #232121;
+  background-color: #b59500; color:
 }
 
 .opcion.correcta {
-  background-color: #4caf50 !important; /* Verde */
+  background-color: #4caf50 !important;
   color: white;
 }
 
 .opcion.incorrecta {
-  background-color: #f44336 !important; /* Rojo */
+  background-color: #f44336 !important; 
   color: white;
 }
 .grilla-opciones {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, 1fr); 
+  grid-template-rows: repeat(6, auto);   
   gap: 10px;
-  margin-bottom: 20px;
+  max-width: 800px; 
+  margin: 0 auto;   
 }
 
 .opcion-grilla {
   padding: 10px;
-  background-color: #eee;
-  border: 2px solid transparent;
-  border-radius: 8px;
+  height: 90px;
+  text-align: center;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffd866;
+  transition: 0.2s;
 }
 
 .opcion-grilla:hover {
-  background-color: #ddd;
+  background-color: #b59500;
 }
 
 .opcion-grilla.seleccionada {
-  background-color: #007bff;
+  background-color: #00c20a;
+  font-weight: bold;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif; 
+  background-color: #fff9db; 
+  min-height: 100vh;
+  color: #333;
+}
+
+.opcion-grilla {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   color: white;
-  border-color: #0056b3;
+  font-size: 16px;
+}
+
+.opcion-grilla:hover {
+  transform: scale(1.05) rotate(-1deg);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.opcion-grilla.seleccionada {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: #00ffff;
+  transform: scale(1.1);
+  animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+h1, h2, h3, h4, p, button {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.opcion-grilla {
+  background-color: #ffeec0;
+  color: #333;
+  border: 2px solid #d4b44c;
+  transition: all 0.3s ease;
+}
+
+.opcion-grilla:hover {
+  background-color: #fff1c9;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.opcion-grilla.seleccionada {
+  background-color: #ffd866;
+  border-color: #b59500;
 }
