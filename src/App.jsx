@@ -13,7 +13,7 @@ function App() {
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
   const [opcionesMezcladas, setOpcionesMezcladas] = useState([]);
   const [pantallaFinal, setPantallaFinal] = useState(false);
-
+  const [recargar, setRecargar] = useState(0);
   useEffect(() => {
     fetch("https://opentdb.com/api_category.php")
       .then((res) => res.json())
@@ -38,7 +38,9 @@ function App() {
         setPreguntas(data.results);
         setPreguntaActual(0);
         setRespuestaSeleccionada(null);
-        setOpcionesMezcladas(mezclarOpciones(data.results[0]));
+        if (data.results.length > 0) {
+          setOpcionesMezcladas(mezclarOpciones(data.results[0]));
+        }
         setCargando(false);
       });
   };
@@ -47,7 +49,7 @@ function App() {
     if (pantalla === "juego") {
       cargarPreguntas();
     }
-  }, [pantalla]);
+  }, [pantalla, recargar]);
 
   useEffect(() => {
     if (preguntas.length > 0) {
@@ -72,12 +74,12 @@ function App() {
     setRespuestaSeleccionada(respuesta);
 
     if (respuesta === pregunta.correct_answer) {
-      setPuntaje((prev) => prev + 10); // ✅ suma 10 puntos por acierto
+      setPuntaje((prev) => prev + 10);
     }
 
     setTimeout(() => {
       if (preguntaActual + 1 === preguntas.length) {
-        setPantallaFinal(true); // ✅ nueva pantalla final
+        setPantallaFinal(true);
       } else {
         setPreguntaActual((prev) => prev + 1);
         setRespuestaSeleccionada(null);
@@ -86,10 +88,13 @@ function App() {
   };
 
   const reiniciarTrivia = () => {
-    setPantalla("juego");
-    cargarPreguntas();
     setPuntaje(0);
+    setPreguntaActual(0);
+    setPreguntas([]);
+    setRespuestaSeleccionada(null);
     setPantallaFinal(false);
+    setRecargar((prev) => prev + 1);
+    setPantalla("juego");
   };
 
   const salirAPantallaPrincipal = () => {
@@ -107,31 +112,38 @@ function App() {
           <h1>Bienvenido a Trivia</h1>
 
           <h3>Selecciona una temática:</h3>
-<div className="grilla-opciones">
-  {categorias.map((cat) => (
-    <button
-      key={cat.id}
-      className={`opcion-grilla ${categoriaSeleccionada === String(cat.id) ? "seleccionada" : ""}`}
-      onClick={() => setCategoriaSeleccionada(String(cat.id))}
-    >
-      {cat.name}
-    </button>
-  ))}
-</div>
+          <div className="grilla-opciones">
+            {categorias.map((cat) => (
+              <button
+                key={cat.id}
+                className={`opcion-grilla ${
+                  categoriaSeleccionada === String(cat.id) ? "seleccionada" : ""
+                }`}
+                onClick={() => setCategoriaSeleccionada(String(cat.id))}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
 
-<h3>Selecciona una dificultad:</h3>
-<div className="grilla-opciones">
-  {["easy", "medium", "hard"].map((nivel) => (
-    <button
-      key={nivel}
-      className={`opcion-grilla ${dificultadSeleccionada === nivel ? "seleccionada" : ""}`}
-      onClick={() => setDificultadSeleccionada(nivel)}
-    >
-      {nivel === "easy" ? "Fácil" : nivel === "medium" ? "Media" : "Difícil"}
-    </button>
-  ))}
-</div>
-
+          <h3>Selecciona una dificultad:</h3>
+          <div className="grilla-opciones">
+            {["easy", "medium", "hard"].map((nivel) => (
+              <button
+                key={nivel}
+                className={`opcion-grilla ${
+                  dificultadSeleccionada === nivel ? "seleccionada" : ""
+                }`}
+                onClick={() => setDificultadSeleccionada(nivel)}
+              >
+                {nivel === "easy"
+                  ? "Fácil"
+                  : nivel === "medium"
+                  ? "Media"
+                  : "Difícil"}
+              </button>
+            ))}
+          </div>
 
           <button
             onClick={comenzarJuego}
@@ -153,7 +165,11 @@ function App() {
               <p>
                 Pregunta {preguntaActual + 1} de {preguntas.length}
               </p>
-              <h4 dangerouslySetInnerHTML={{ __html: preguntas[preguntaActual].question }} />
+              <h4
+                dangerouslySetInnerHTML={{
+                  __html: preguntas[preguntaActual].question,
+                }}
+              />
               {opcionesMezcladas.map((opcion, i) => {
                 let className = "opcion";
                 if (respuestaSeleccionada !== null) {
